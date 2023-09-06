@@ -11,7 +11,9 @@ As can be seen in the code displayed in this repository, I am focused on buildin
 3. [Notebook Contents](#notebookcontents)
    <br>a. [model_testingOBJDET Part 1](#model_testingOBJDETpart1)
    <br>b. [model_testingOBJDET Part 2](#model_testingOBJDETpart2)
-   <br>b. [model_testingOBJDET Part 3](#model_testingOBJDETpart3)
+   <br>c. [model_testingOBJDET Part 3](#model_testingOBJDETpart3)
+   <br>d. [IMGCLASS_withPATCH](#imgclass_withpatch)
+4. [Credits](#credits)
 
 <a name="installation"></a>
 # 1. Installation/Application
@@ -42,5 +44,23 @@ The preamble of the notebook is setting the different folders in your drive fold
 <br>***Reflection of pre-processing and finally getting model to train*** - Short reflection of the steps I had to take to make the model work, which could also serve as a Common Problems section.
 
 <a name="model_testingOBJDETpart3"></a>
-<br>**b. model_testingOBJDET Part 3:**
+<br>**c. model_testingOBJDET Part 3:**
 <br>***Converting Original Set Of Images*** As mentioned above, the alpha channel must be removed as an extra channel, where only RGB should be left as the three accepted channels.
+<br>***Second Backup Warning***
+<br>***Model Evaluation*** - This script will test the model's saved metrics gathered during the training process, such as its accuracy, recall and precision. It's not especially clear to me why the accuracy is reported to be so bad by these values, as can be seen later on that the model fares well with unseen scenery. The error could result from difficult classes to localise, such as 'vegetation' where the big collections of trees can be difficult to localise and group together.
+<br>***Showcasing the Detection on an Image*** -  The model is called to predict objects in a scene. The image can be from the test set, or as I have edited the code to show, from a personally chosen image from Google or from a contributor.
+<br>***Evaluation*** - These values show the metrics for my first few object detection models trained with some internet-sourced datasets. They were insufficient in every way, and soon resulted in having to personally collect images and annotate them all myself.
+<br>The rest of Part 3 deals with some old degraded methods to fix the accuracy of the model, when all I needed to do was start again with a personally chosen and smaller image/annotation dataset.
+
+<a name="imgclass_withpatch"></a>
+<br>**d. IMGCLASS_withPATCH.ipynb**
+<br> ***Loading the Image Datasets*** - Finding the mean and standard deviation values for my training set. However, this is for the method of normalising according to a mean and standard deviation value, which is not used in this instance.
+<br>***Training the model*** - Now that I have pre-processed the data in a similar way to my obj detection pipeline, to be precise the pixel value normalisation stage, I can move on with training a MobileNet V2 pre-trained model, which is also used as the feature extractor in the obj detection pipeline. (The values must be resized however, and 320 x 320 appears to be a good size for the model to at least recognise features well).
+<br>***Saving and Loading the models*** - When later creating a patch, it is vital to save the model using <model.state_dict()>, as the full model save using <torch.save(model)> is insufficient.
+<br>***Patch functions*** - This section creates patches of a set size, and is well annotated to explain each cell's contribution to the final product.
+
+<a name="credits"></a>
+# Credits
+Thanks to Robin Nandi for his help with teaching me about Github.
+Thanks to Tom Schofield, for his help with printing out the patches and filming the footage with his drone.
+Many thanks to Megan Porter, for assisting me in providing some images to test the object detection model with, and also helping me through some stressful and mind-boggling times.
