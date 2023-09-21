@@ -92,8 +92,8 @@ The preamble of the notebook is setting the different folders in your drive fold
 <br>`num_classes = 7`
 <br>`model = models.mobilenet_v2(pretrained=False)`
 <br>`model.classifier = nn.Sequential(
-<br>    nn.Linear(1280, num_classes)
-<br>)`
+   nn.Linear(1280, num_classes)
+   )`
 <br>`checkpoint_path = '/content/drive/MyDrive/IMGCLASSmodels/models/<br>``earlystopping_mobilenetv2_model.pth'`
 <br>`model.load_state_dict(torch.load(checkpoint_path))`
 <br>`# Set the model to evaluation mode`
