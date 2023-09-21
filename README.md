@@ -13,7 +13,14 @@ As can be seen in the code displayed in this repository, I am focused on buildin
    <br>b. [model_testingOBJDET Part 2](#model_testingOBJDETpart2)
    <br>c. [model_testingOBJDET Part 3](#model_testingOBJDETpart3)
    <br>d. [IMGCLASS_withPATCH](#imgclass_withpatch)
-4. [Credits](#credits)
+   <br>e. [SORTING_imgclassdata](#sorting_imgclassdata)
+4. [Unique Files](#uniquefiles)
+   <br>a. [obj_detectionMODEL](#obj_detectionfiles)
+   <br>b. [img_classificationMODEL](#img_classificationfiles)
+5. [Results of models](#modelresults)
+   <br>a. [Object Detection model](#objectdetectionresults)
+   <br>b. [Patch results](#patchresults)
+6. [Credits](#credits)
 
 <a name="installation"></a>
 # 1. Installation/Application
@@ -21,7 +28,9 @@ The Tensorflow object detection module is imported via a special command in [mod
 
 <a name="usage"></a>
 # 2. Usage
-If anything, this project can be used as a guidance for building an accurate object detection model on Google Colab, with code based on the very helpful [Tensorflow Object Detection Tutorial](https://www.youtube.com/watch?v=yqkISICHH-U) by Nicholas Renotte. The user could train a model with my manually annotated dataset, or use their own, or they could increase the amount of training steps, use a different model etc. The notebooks model_testingOBJDET are carefully annotated to help the user understand what each cell is doing.  
+This project can be used as a guidance for building an accurate object detection model on Google Colab, with code based on the very helpful [Tensorflow Object Detection Tutorial](https://www.youtube.com/watch?v=yqkISICHH-U) by Nicholas Renotte. The user could train a model with my manually annotated dataset, or use their own, or they could increase the amount of training steps, use a different model etc. The notebooks model_testingOBJDET are carefully annotated to help the user understand what each cell is doing.
+
+<br>I have included the patches in the image classification folder, so these patches can be tested in other environments.
 
 <a name="notebookcontents"></a>
 # 3. Contents for each .ipynb notebook in the repository
@@ -58,6 +67,64 @@ The preamble of the notebook is setting the different folders in your drive fold
 <br>***Training the model*** - Now that I have pre-processed the data in a similar way to my obj detection pipeline, to be precise the pixel value normalisation stage, I can move on with training a MobileNet V2 pre-trained model, which is also used as the feature extractor in the obj detection pipeline. (The values must be resized however, and 320 x 320 appears to be a good size for the model to at least recognise features well).
 <br>***Saving and Loading the models*** - When later creating a patch, it is vital to save the model using <model.state_dict()>, as the full model save using <torch.save(model)> is insufficient.
 <br>***Patch functions*** - This section creates patches of a set size, and is well annotated to explain each cell's contribution to the final product.
+<br>***Testing Screenshots from Drone Footage*** - This part of the notebook tests the patch's attempt at inducing misclassification, and prints the image with the top three predictions.
+
+<a name="sorting_imgclassdata"></a>
+<br>**e. SORTING_imgclassdata.ipynb**
+<br>This folder firstly removes the alpha channel from images, as they usually appears when using Google Images as a source, and then in ***Cropping for image classification model***, the .xml files are parsed: the co-ordinates are used to extract the objects within them and place them in a folder based on their class name, which is also available within the .xml file data.
+
+<a name="uniquefiles"></a>
+4. ***Unique files***
+<a name="obj_detectionfiles"></a>
+<br>***a. Object Detection Model Files:***
+<br>***ckpt-6.data-00000-of-00001*** & ***ckpt-6.index*** are both checkpoint files for the final pre-trained object detection model, which is used for the rest of the project.
+<br>***label_map.pbtxt*** is the label map that the Tensorflow API uses in training.
+<br>***pipeline (2).config*** is my pipeline with changed hyper-parameters to achieve a higher accuracy.
+<br>***train.record*** and ***test.record*** are binary records of the image and .xml file data, which are necessary for the training process to minimise RAM usage.
+<a name="img_classificationfiles"></a>
+<br>***b. Image Classification Model Files:***
+<br>***earlystopping_mobilenetv2_model.pth*** is the capture of the state of the trained model which I used for the remainder of the project. It should be loaded like this: 
+`# Load the model in case of the CPU environment it was loaded in needing specifying
+num_classes = 7
+model = models.mobilenet_v2(pretrained=False)
+model.classifier = nn.Sequential(
+    nn.Linear(1280, num_classes)
+)
+checkpoint_path = '/content/drive/MyDrive/IMGCLASSmodels/models/earlystopping_mobilenetv2_model.pth'
+model.load_state_dict(torch.load(checkpoint_path))
+# Set the model to evaluation mode
+model.eval()`
+<br>***"""_patch.pt*** files are the patches stored as .pt files.
+
+<a name="modelresults"></a>
+***5. Model Results***
+<a name="objectdetectionresults"></a>
+Below are some of the object detection model's predictions:
+![A car from test set](car(2).png)
+![A person from test set](download (1).png)
+![A neighbourhood of houses and trees cut off at a certain number of predictions from test set](houses.png)
+![A lake surrounded by vegetation from test set](water2.png)
+![A sheep from test set](sheep1.png)
+![A flock of sheep from test set](sheep2.png)
+![A field of sheep cut off at a certain number of predictions from test set](sheep3.png)
+![A house, picture provided by Megan Porter](unseen1.png)
+![A farmhouse, picture provided by Megan Porter](unseen2.png)
+![Another angle of a farmhouse, picture provided by Megan Porter](unseen3.png)
+<a name="patchresults"></a>
+Below are the patch predictions for the image classification model:
+![sheep 32x32, real object 'person'](BRIGHTERDARKSHEEP32X32_TOP3.png)
+![sheep 64x64, real object 'person'](DARKSHEEP64X64_TOP3.png)
+![car 32x32, real object 'vegetation'](DARKCAR32X32_TOP3.png)
+![car 64x64, real object 'vegetation'](DARKCAR64X64_TOP3.png)
+![person 32x32, real object 'car'](DARKEDITPERSON32X32_TOP3.png)
+![person 64x64, real object 'car'](DARKPERSON64X64_TOP3.png)
+The patches are largely ignored by the image classification model, apart from the sheep patch.
+Below are the predictions for the object detection model:
+![sheep 32x32, real object 'person'](OBJDET_SHEEP32X32.png)
+![sheep 64x64, real object 'person'](OBJDET_SHEEP64X64.png)
+![car 32x32, real object 'vegetation'](OBJDET_CAR32X32.png)
+![car 64x64, real object 'vegetation'](OBJDET_CAR64X64.png)
+![person 64x64, real object 'car'](OBJDET_PERSON64X64.png)
 
 <a name="credits"></a>
 # Credits
