@@ -100,31 +100,31 @@ model.eval()`
 ***5. Model Results***
 <a name="objectdetectionresults"></a>
 Below are some of the object detection model's predictions:
-![A car from test set](car(2).png)
-![A person from test set](download (1).png)
-![A neighbourhood of houses and trees cut off at a certain number of predictions from test set](houses.png)
-![A lake surrounded by vegetation from test set](water2.png)
-![A sheep from test set](sheep1.png)
-![A flock of sheep from test set](sheep2.png)
-![A field of sheep cut off at a certain number of predictions from test set](sheep3.png)
-![A house, picture provided by Megan Porter](unseen1.png)
-![A farmhouse, picture provided by Megan Porter](unseen2.png)
-![Another angle of a farmhouse, picture provided by Megan Porter](unseen3.png)
+![A car from test set](images/car(2).png)
+![A person from test set](images/download%20(1).png)
+![A neighbourhood of houses and trees cut off at a certain number of predictions from test set](images/houses.png)
+![A lake surrounded by vegetation from test set](images/water2.png)
+![A sheep from test set](images/sheep1.png)
+![A flock of sheep from test set](images/sheep2.png)
+![A field of sheep cut off at a certain number of predictions from test set](images/sheep3.png)
+![A house, picture provided by Megan Porter](images/unseen1.png)
+![A farmhouse, picture provided by Megan Porter](images/unseen2.png)
+![Another angle of a farmhouse, picture provided by Megan Porter](images/unseen3.png)
 <a name="patchresults"></a>
 Below are the patch predictions for the image classification model:
-![sheep 32x32, real object 'person'](BRIGHTERDARKSHEEP32X32_TOP3.png)
-![sheep 64x64, real object 'person'](DARKSHEEP64X64_TOP3.png)
-![car 32x32, real object 'vegetation'](DARKCAR32X32_TOP3.png)
-![car 64x64, real object 'vegetation'](DARKCAR64X64_TOP3.png)
-![person 32x32, real object 'car'](DARKEDITPERSON32X32_TOP3.png)
-![person 64x64, real object 'car'](DARKPERSON64X64_TOP3.png)
+![sheep 32x32, real object 'person'](images/BRIGHTERDARKSHEEP32X32_TOP3.png)
+![sheep 64x64, real object 'person'](images/DARKSHEEP64X64_TOP3.png)
+![car 32x32, real object 'vegetation'](images/DARKCAR32X32_TOP3.png)
+![car 64x64, real object 'vegetation'](images/DARKCAR64X64_TOP3.png)
+![person 32x32, real object 'car'](images/DARKEDITPERSON32X32_TOP3.png)
+![person 64x64, real object 'car'](images/DARKPERSON64X64_TOP3.png)
 The patches are largely ignored by the image classification model, apart from the sheep patch.
 Below are the predictions for the object detection model:
-![sheep 32x32, real object 'person'](OBJDET_SHEEP32X32.png)
-![sheep 64x64, real object 'person'](OBJDET_SHEEP64X64.png)
-![car 32x32, real object 'vegetation'](OBJDET_CAR32X32.png)
-![car 64x64, real object 'vegetation'](OBJDET_CAR64X64.png)
-![person 64x64, real object 'car'](OBJDET_PERSON64X64.png)
+![sheep 32x32, real object 'person'](images/OBJDET_SHEEP32X32.png)
+![sheep 64x64, real object 'person'](images/OBJDET_SHEEP64X64.png)
+![car 32x32, real object 'vegetation'](images/OBJDET_CAR32X32.png)
+![car 64x64, real object 'vegetation'](images/OBJDET_CAR64X64.png)
+![person 64x64, real object 'car'](images/OBJDET_PERSON64X64.png)
 
 <a name="credits"></a>
 # Credits
