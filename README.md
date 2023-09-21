@@ -45,6 +45,7 @@ The preamble of the notebook is setting the different folders in your drive fold
 
 <a name="model_testingOBJDETpart2"></a>
 <br>**b. model_testingOBJDET Part 2:**
+
 <br>***Create TFRecords*** - The TFRecords are ways of storing the annotation data for each image as binary data. The code originally had to be changed as sometimes the .xml files had inconsistent manners of storing values i.e. sometimes ymax and xmax's order were swapped in the object class.
 <br>***Configure pipeline*** - Here we can configure the hyper-parameters of the model. You can do this by setting them in a code cell, or going into the pipeline.config file and editing it there.
 <br>***XML Files Debugging*** - This section is included for when I was collecting annotated datasets, and there was some .xml dubious files that I thought was at fault for the errors in training. It ended up being that the TFRecords inconsistency was at fault.
@@ -54,6 +55,7 @@ The preamble of the notebook is setting the different folders in your drive fold
 
 <a name="model_testingOBJDETpart3"></a>
 <br>**c. model_testingOBJDET Part 3:**
+
 <br>***Converting Original Set Of Images*** As mentioned above, the alpha channel must be removed as an extra channel, where only RGB should be left as the three accepted channels.
 <br>***Second Backup Warning***
 <br>***Model Evaluation*** - This script will test the model's saved metrics gathered during the training process, such as its accuracy, recall and precision. It's not especially clear to me why the accuracy is reported to be so bad by these values, as can be seen later on that the model fares well with unseen scenery. The error could result from difficult classes to localise, such as 'vegetation' where the big collections of trees can be difficult to localise and group together.
@@ -63,6 +65,7 @@ The preamble of the notebook is setting the different folders in your drive fold
 
 <a name="imgclass_withpatch"></a>
 <br>**d. IMGCLASS_withPATCH.ipynb**
+
 <br> ***Loading the Image Datasets*** - Finding the mean and standard deviation values for my training set. However, this is for the method of normalising according to a mean and standard deviation value, which is not used in this instance.
 <br>***Training the model*** - Now that I have pre-processed the data in a similar way to my obj detection pipeline, to be precise the pixel value normalisation stage, I can move on with training a MobileNet V2 pre-trained model, which is also used as the feature extractor in the obj detection pipeline. (The values must be resized however, and 320 x 320 appears to be a good size for the model to at least recognise features well).
 <br>***Saving and Loading the models*** - When later creating a patch, it is vital to save the model using <model.state_dict()>, as the full model save using <torch.save(model)> is insufficient.
@@ -71,10 +74,11 @@ The preamble of the notebook is setting the different folders in your drive fold
 
 <a name="sorting_imgclassdata"></a>
 <br>**e. SORTING_imgclassdata.ipynb**
+
 <br>This folder firstly removes the alpha channel from images, as they usually appears when using Google Images as a source, and then in ***Cropping for image classification model***, the .xml files are parsed: the co-ordinates are used to extract the objects within them and place them in a folder based on their class name, which is also available within the .xml file data.
 
 <a name="uniquefiles"></a>
-4. ***Unique files***
+# 4. Unique files
 <a name="obj_detectionfiles"></a>
 <br>***a. Object Detection Model Files:***
 <br>***ckpt-6.data-00000-of-00001*** & ***ckpt-6.index*** are both checkpoint files for the final pre-trained object detection model, which is used for the rest of the project.
@@ -97,7 +101,7 @@ model.eval()`
 <br>***"""_patch.pt*** files are the patches stored as .pt files.
 
 <a name="modelresults"></a>
-***5. Model Results***
+# 5. Model Results
 <a name="objectdetectionresults"></a>
 Below are some of the object detection model's predictions:
 ![A car from test set](images/car(2).png)
