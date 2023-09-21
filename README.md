@@ -88,16 +88,16 @@ The preamble of the notebook is setting the different folders in your drive fold
 <a name="img_classificationfiles"></a>
 <br>***b. Image Classification Model Files:***
 <br>***earlystopping_mobilenetv2_model.pth*** is the capture of the state of the trained model which I used for the remainder of the project. It should be loaded like this: 
-`# Load the model in case of the CPU environment it was loaded in needing specifying
-num_classes = 7
-model = models.mobilenet_v2(pretrained=False)
-model.classifier = nn.Sequential(
+`# Load the model in case of the CPU environment it was loaded in needing specifying`
+`num_classes = 7`
+`model = models.mobilenet_v2(pretrained=False)`
+`model.classifier = nn.Sequential(
     nn.Linear(1280, num_classes)
-)
-checkpoint_path = '/content/drive/MyDrive/IMGCLASSmodels/models/earlystopping_mobilenetv2_model.pth'
-model.load_state_dict(torch.load(checkpoint_path))
-# Set the model to evaluation mode
-model.eval()`
+)`
+`checkpoint_path = '/content/drive/MyDrive/IMGCLASSmodels/models/``earlystopping_mobilenetv2_model.pth'`
+`model.load_state_dict(torch.load(checkpoint_path))`
+`# Set the model to evaluation mode`
+`model.eval()`
 <br>***"""_patch.pt*** files are the patches stored as .pt files.
 
 <a name="modelresults"></a>
